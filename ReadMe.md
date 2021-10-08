@@ -27,8 +27,8 @@ Execute the analysis
 You can run the command below under the project directory
 
 ```
-Rscript -e "rmarkdown::render('vacc_report.Rmd')"
+Rscript -e "rmarkdown::render('Vacc_report.Rmd')"
 ```
 
-This will create a fill named vacc_report.html in the same folder that contain the results.
+This will create a fill named Vacc_report.html in the same folder that contain the results.
 
