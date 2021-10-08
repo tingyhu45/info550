@@ -1,0 +1,79 @@
+---
+title: "HW2_Tingyang_Hu"
+author: "Tingyang Hu"
+date: "9/23/2021"
+output: 
+  html_document: 
+    theme: sandstone
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+The dataset contains the Covid-19 vaccination data across countries, territories and areas provided by WHO to the data of 08/31/2021. The variables include countries, cumulative total vaccine doses administered, cumulative number of persons vaccinated with at least one dose, vaccine types used, etc. Exploratory analysis including characterizing summary statistics and data visualization will be performed on the data. 
+
+## Loading and preparing data
+```{r data, echo = FALSE}
+# read in data
+vaccine <- read.csv("~/Desktop/vaccination-data.csv",header = T)
+
+knitr::kable(head(vaccine[,-12]),
+             caption = "Table 1:The first 6 rows of the vaccine dataset")
+
+# look at the descriptive statistics 
+knitr::kable(summary(vaccine),
+             caption = "Tabl 2:The Summary Statistics the vaccine dataset")
+
+# deal with missing values: impute with mean of variables
+fun1<- function(x) {x[is.na(x)] <- mean(x, na.rm = TRUE)
+                    x}
+vaccine$TOTAL_VACCINATIONS_PER100 <- fun1(vaccine$TOTAL_VACCINATIONS_PER100)
+vaccine$PERSONS_FULLY_VACCINATED_PER100 <- fun1(vaccine$PERSONS_FULLY_VACCINATED_PER100)
+```
+
+## Figures 
+
+The figure for vaccination across different countries are showed, in which the shade of the color indicates number of vaccinations.
+```{r load packages, include=FALSE}
+library (maps)
+library (mapdata)
+library(ggplot2)
+library(dplyr)
+```
+
+
+```{r figure1, echo=FALSE, fig.cap="Figure 1:Vaccinated Population Distribution"}
+# map with distribution of vaccination
+
+world_map<-map_data("world")
+ 
+#deal with country variables
+vaccine$COUNTRY<- gsub("United States of America","USA",vaccine$COUNTRY)
+vaccine$COUNTRY<- gsub("The United Kingdom","United Kingdom",vaccine$COUNTRY)
+vaccine$COUNTRY<- gsub("Russian Federation","Russia",vaccine$COUNTRY)
+
+# merge data for map
+world_map %>% 
+  left_join(vaccine, by = c("region" = "COUNTRY")) -> vaccine_world_map
+
+#head(vaccine_world_map)
+
+# plot the map with total vaccination 
+ ggplot(vaccine_world_map, aes(x = long, y = lat, group = group)) +
+  geom_polygon(aes(fill= TOTAL_VACCINATIONS_PER100), colour = "white") +
+  scale_x_continuous(breaks = seq(-180, 210, 45), labels = function(x){paste0(x, "°")}) +
+  scale_y_continuous(breaks = seq(-60, 100, 30), labels = function(x){paste0(x, "°")}) +
+  scale_fill_gradient(low = "lightblue", high="steel blue") +
+  labs(title="Total Vaccinations per 100 Across Countries", y="Latitude", x="Longitude") + theme_light() +
+  theme(legend.key.size = unit(18, "pt"),legend.title=element_text(size=8),legend.position = "bottom") + coord_fixed() 
+
+```
+## My working path and info
+
+The working directory and session information in my laptop are as follows:
+```{r wd,echo=FALSE}
+getwd() 
+devtools::session_info()
+```
+
