@@ -5,7 +5,7 @@ Covid-19 Vaccination project
 Introduction and preparation
 ----
 
-For my project, I will analyze the Covid-19 vaccination data across different countries.Exploratory analysis including characterizing summary statistics and data visualization will be performed on the data.
+For my project, I will analyze the Covid-19 vaccination data across different countries. Exploratory analysis including summary statistics characterization and data visualization will be performed on the data.
 To analyze the data you would need to some `R` packages, which can be installed using R commands.
 
 ```R
