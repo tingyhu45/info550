@@ -32,6 +32,18 @@ vaccine$TOTAL_VACCINATIONS_PER100 <- fun1(vaccine$TOTAL_VACCINATIONS_PER100)
 vaccine$PERSONS_FULLY_VACCINATED_PER100 <- fun1(vaccine$PERSONS_FULLY_VACCINATED_PER100)
 ```
 
+## Table of the overall vaccination
+```{r load package, include=FALSE}
+library(table1)
+```
+
+```{r table,echo=FALSE}
+# create the table of characteristics
+table1( ~ TOTAL_VACCINATIONS_PER100 + PERSONS_FULLY_VACCINATED_PER100, data = vaccine)
+
+```
+
+
 ## Figures 
 
 The figure for vaccination across different countries are showed, in which the shade of the color indicates number of vaccinations.
@@ -68,12 +80,5 @@ world_map %>%
   labs(title="Total Vaccinations per 100 Across Countries", y="Latitude", x="Longitude") + theme_light() +
   theme(legend.key.size = unit(18, "pt"),legend.title=element_text(size=8),legend.position = "bottom") + coord_fixed() 
 
-```
-## My working path and info
-
-The working directory and session information in my laptop are as follows:
-```{r wd,echo=FALSE}
-getwd() 
-devtools::session_info()
 ```
 
