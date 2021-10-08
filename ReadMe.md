@@ -11,7 +11,7 @@ To analyze the data you would need to some `R` packages, which can be installed 
 ```R
 installed_pkgs <- row.names(installed.packages())
 
-pkgs <- c(“table1","maps", "mapdata","ggplot2","dplyr")
+pkgs <- c("table1","maps","mapdata","ggplot2","dplyr")
 
 for(p in pkgs){
 	if(!(p %in% installed_pkgs)){
