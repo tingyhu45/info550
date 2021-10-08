@@ -6,7 +6,7 @@ Introduction and preparation
 ----
 
 For my project, I will analyze the Covid-19 vaccination data across different countries. Exploratory analysis including summary statistics characterization and data visualization will be performed on the data.
-To analyze the data you would need to some `R` packages, which can be installed using R commands.
+To analyze the data you would need some `R` packages (i.e., "table 1" for the table of summary characteristics; "maps" and "mapdata" for loading map data; "ggplot2" for the figure; "dplyr" for manipulating the data), which can be installed using R commands.
 
 ```R
 installed_pkgs <- row.names(installed.packages())
