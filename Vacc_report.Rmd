@@ -16,7 +16,7 @@ The dataset contains the Covid-19 vaccination data across countries, territories
 ## Loading and preparing data
 ```{r data, echo = FALSE}
 # read in data
-vaccine <- read.csv("~/Desktop/vaccination-data.csv",header = T)
+vaccine <- read.csv("vaccination-data.csv",header = T)
 
 knitr::kable(head(vaccine[,-12]),
              caption = "Table 1:The first 6 rows of the vaccine dataset")
